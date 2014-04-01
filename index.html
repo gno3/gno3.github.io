@@ -1,7 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+    <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script type="text/javascript">//<![CDATA[ 
+        $(document).ready(function () {
+            var input = document.getElementById('searchTextField');
+            var options = {
+                types: ['(cities)'],
+                componentRestrictions: { country: 'us' }
+            };
+
+            var autocomplete = new google.maps.places.Autocomplete(input, options);
+            //autocomplete.bindTo('bounds', map); 
+
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                $("#results").html('');
+                var place = autocomplete.getPlace();
+                $("#results").append('<p> Latitude and Longtidute : ' + place.geometry.location + '</p>');
+                $("#results").append('<p> Address : ' + place.formatted_address + '</p>');
+                $("#results").append('<p> Places Name : ' + place.name + '</p>');
+
+                var searchAddressComponents = place.address_components;
+                $.each(searchAddressComponents, function () {
+                    if (this.types[0] == "postal_code") {
+                        searchCountry = this.short_name;
+                    }
+                });
+            });
+
+        });//]]>  
+
+</script>
+    <style>
+        /*.ui-autocomplete { overflow-y: auto; width:300px; }
+        * html .ui-autocomplete { height: expression( this.scrollHeight > 320 ? "320px" : "auto" ); }
+        .ui-autocomplete { max-height: 320px; }
+        .ui-autocomplete li { font-size:10pt; }*/ 
+        #results{margin-top:100px; width:600px; border:1px solid #000000; background-color:#CCCCCC; min-height:200px;}
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<p>Location: <input type="text" id="searchTextField" size="50"  placeholder="Where do you want to go?"/></p>
+<div id="results"></div>
 </body>
 </html>

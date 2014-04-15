@@ -1,5 +1,0 @@
-C:\Projects\guthub\app\gutHub\bin\gutHub.dll
-C:\Projects\guthub\app\gutHub\bin\gutHub.pdb
-C:\Projects\guthub\app\gutHub\obj\Debug\gutHub.csprojResolveAssemblyReference.cache
-C:\Projects\guthub\app\gutHub\obj\Debug\gutHub.dll
-C:\Projects\guthub\app\gutHub\obj\Debug\gutHub.pdb
